@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- PURPOSE: Fingerprints Validation Schema for the re-validation of fingerprints data between EMR  and NDR -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Container">
+   <xs:complexType>
+      <xs:sequence>
+	  <xs:element name="EmrType" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        EMR TYPE
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="NMRS" />
+                        <xs:enumeration value="LAMISPlus" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>	
+        <xs:element name="MessageHeader" type="MessageHeaderType" minOccurs="1" maxOccurs="1" />
+		<xs:element name="PatientDemographics" type="PatientDemographicsType" minOccurs="1" maxOccurs="1" />      
+	  
+	  </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+
+	<xs:complexType name="MessageHeaderType">
+		<xs:sequence>
+			<xs:element type="xs:date" name="MessageCreationDateTime"/>
+			<xs:element type="xs:string" name="MessageUniqueID"/>
+			<xs:element name="XmlType" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        XML TYPE
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="fingerprintsvalidation" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>				
+			<xs:element name="MessageVersion" type="xs:float" fixed="1.0" minOccurs="1" maxOccurs="1"/>
+
+			<xs:element name="MessageSendingOrganisation" type="MessageSendingOrganisationType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MessageSendingOrganisationType">
+		<xs:sequence>
+			<xs:element type="xs:string" name="FacilityName" minOccurs="1" maxOccurs="1"/>
+			 <xs:element type="xs:string" name="FacilityID" minOccurs="1" maxOccurs="1"/> <!--DatimCode -->
+			<xs:element type="xs:string" name="FacilityTypeCode"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PatientDemographicsType">
+		<xs:sequence>
+			<xs:element name="PatientIdentifier" minOccurs="1" maxOccurs="1">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation xml:lang="en">
+							The Patient Identifier
+						</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="0" />
+						<xs:maxLength value="2000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FingerPrints" type="FingerPrintType" minOccurs="1" maxOccurs="unbounded">
+			</xs:element>		
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FingerPrintType">
+		<xs:sequence>
+			<xs:element name="dateCaptured" type="xs:date" minOccurs="1" maxOccurs="1"/>			
+			<xs:element name="visitId" type="StringType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="visitDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="captureCount" type="xs:int" minOccurs="1" maxOccurs="1" />
+			<xs:element name="rightHand" type="rightHandType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="leftHand" type="leftHandType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="rightHandType">
+		<xs:sequence>
+			<xs:element name="RightThumb" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedRightThumb" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="RightThumbQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="RightIndex" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedRightIndex" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="RightIndexQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="RightMiddle" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedRightMiddle" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="RightMiddleQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="RightWedding" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedRightWedding" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="RightWeddingQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="RightSmall" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedRightSmall" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="RightSmallQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="leftHandType">
+		<xs:sequence>
+			<xs:element name="LeftThumb" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedLeftThumb" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="LeftThumbQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="LeftIndex" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedLeftIndex" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="LeftIndexQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="LeftMiddle" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedLeftMiddle" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="LeftMiddleQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="LeftWedding" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedLeftWedding" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="LeftWeddingQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="LeftSmall" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="HashedLeftSmall" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="LeftSmallQuality" type="xs:int" minOccurs="0" maxOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>	
+	    
+		<xs:simpleType name="StringType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="0" />
+            <xs:maxLength value="255" />
+        </xs:restriction>
+    </xs:simpleType>
+
+	</xs:schema>

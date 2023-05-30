@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="extractionemr-omod" />
+        <module name="extractionemr-api" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="extractionemr" target="1.5" />
+      <module name="extractionemr-api" target="8" />
+      <module name="extractionemr-omod" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

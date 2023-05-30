@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <!--
+    	See http://wiki.openmrs.org/display/docs/Module+liquibase+File for
+    	documentation on this file.
+
+        See http://www.liquibase.org/manual/home#available_database_refactorings
+        for a list of supported elements and attributes
+    -->
+
+    <!-- Uncomment the changeset below if you want to make the Item class persistable, see also Item and NigeriaemrDaoTest -->
+
+    <changeSet id="extraction-2023-05-24" author="Isujeh">
+        <comment>
+            Creating the finger_verify export table
+        </comment>
+        <createTable tableName="finger_verify_export">
+            <column name="finger_verify_export_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="owner" type="int" />
+            <column name="total_number_of_patients" type="int" />
+            <column name="total_number_of_patients_processed" type="int" defaultValue="0" />
+            <column name="date_started" type="TIMESTAMP" />
+            <column name="date_ended" type="TIMESTAMP"  defaultValueDate="now()"/>
+            <column name="path" type="varchar(255)"/>
+            <column name="status" type="varchar(25)"/>
+            <column name="voided" type="BIT(1)"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="report_folder" type="varchar(255)"/>
+            <column name="context_path" type="varchar(255)"/>
+            <column name="last_date" type="TIMESTAMP" />
+            <column name="patients" type="LONGTEXT"/>
+            <column name="date_updated" type="TIMESTAMP" defaultValueDate="now()"/>
+            <column name="batch_id" type="int"/>
+            <column name="error_patients" type="LONGTEXT"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="extraction20230524" author="Isujeh">
+        <comment>
+            Creating the finger_verify export table
+        </comment>
+        <createTable tableName="finger_verify_batch_export">
+            <column name="finger_verify_batch_export_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="owner" type="int" />
+            <column name="total_number_of_patients" type="int" />
+            <column name="total_number_of_patients_processed" type="int" defaultValue="0" />
+            <column name="date_started" type="TIMESTAMP" defaultValueDate="now()"/>
+            <column name="date_created" type="TIMESTAMP" defaultValueDate="now()"/>
+            <column name="date_updated" type="TIMESTAMP" defaultValueDate="now()"/>
+            <column name="last_export_date" type="TIMESTAMP" defaultValueDate="now()"/>
+            <column name="status" type="varchar(250)"/>
+            <column name="name" type="varchar(100)"/>
+            <column name="path" type="varchar(250)"/>
+            <column name="report_folder" type="varchar(255)"/>
+            <column name="context_path" type="varchar(255)"/>
+            <column name="date_ended" type="TIMESTAMP" defaultValueDate="now()"/>
+            <column name="voided" type="BIT(1)"/>
+            <column name="error_path" type="varchar(250)"/>
+            <column name="error_list" type="varchar(250)"/>
+            <column name="automatic" type="BIT(1)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
