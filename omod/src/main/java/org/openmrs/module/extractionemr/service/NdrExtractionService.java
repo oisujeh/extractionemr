@@ -6,7 +6,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.context.ServiceContext;
-import org.openmrs.module.extractionemr.ETREvent;
+import org.openmrs.module.extractionemr.NDREvent;
 import org.openmrs.module.extractionemr.ExtractionemrConfig;
 import org.openmrs.module.extractionemr.api.service.ExtractionObsService;
 import org.openmrs.module.extractionemr.api.service.ExtractionemrService;
@@ -129,7 +129,7 @@ public class NdrExtractionService {
 				e.printStackTrace();
 				throw new Exception("Error Processing Export");
 			}
-			ETREvent ndrEvent = (ETREvent) ServiceContext.getInstance().getApplicationContext().getBean("ndrEvent");
+			NDREvent ndrEvent = (NDREvent) ServiceContext.getInstance().getApplicationContext().getBean("ndrEvent");
 			NDRExport ndrExport1 = extractionemrService.saveNdrExportItem(ndrExport);
 			ndrEvent.send(ndrExport1);
 		}
@@ -318,7 +318,7 @@ public class NdrExtractionService {
 		try {
 			int idInt = Integer.parseInt(id);
 			ExtractionemrService extractionemrService = Context.getService(ExtractionemrService.class);
-			ETREvent ndrEvent = (ETREvent) ServiceContext.getInstance().getApplicationContext().getBean("ndrEvent");
+			NDREvent ndrEvent = (NDREvent) ServiceContext.getInstance().getApplicationContext().getBean("ndrEvent");
 			List<NDRExport> ndrExports;
 			if("resume".equalsIgnoreCase(action)) {
 				 ndrExports = extractionemrService.getNDRExportByBatchIdByStatus(idInt, "Processing");

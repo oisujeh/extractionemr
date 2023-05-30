@@ -39,20 +39,20 @@
 	</bean>
 
 	<!--     Message Sender Definition -->
-	<bean id="ndrEvent" class="org.openmrs.module.extractionemr.ETREvent">
+	<bean id="ndrEvent" class="org.openmrs.module.extractionemr.NDREvent">
 		<constructor-arg index="0" ref="jmsTemplate" />
 	</bean>
 
 
 	<!-- Message Receiver Definition -->
-	<bean id="consumer1" class="org.openmrs.module.extractionemr.Consumer">
+	<bean id="consumer" class="org.openmrs.module.extractionemr.Consumer">
 	</bean>
 
 	<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destinationName" value="ndrExportQueue" />
-		<property name="messageListener" ref="consumer1" />
-		<property name="concurrentConsumers" value="4"/>
+		<property name="messageListener" ref="consumer" />
+		<property name="concurrentConsumers" value="2"/>
 		<property name="sessionAcknowledgeMode" value="1" />
 	</bean>
 
